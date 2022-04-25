@@ -23,8 +23,7 @@ size_t str_len(const char* str)
 //
 String::String()
 {
-	ptr = new char[1];
-	*ptr = '\0';//пустая строка
+	ptr = nullptr;
 	size = 0;
 }
 String::String(const char* _ptr)
@@ -86,21 +85,21 @@ String & String::operator=(String&& rhs) noexcept
 }
 String  operator+(const String& left, const String& right)
 {
-	unsigned int sumSize = left.size + right.size;
-	char* sumPtr = new char[sumSize + 1];
-	for (unsigned int i = 0; i < left.size; ++i)
+	String sumStr;
+	sumStr.size = left.size + right.size;
+	sumStr.ptr = new char[sumStr.size + 1];
+	
+	unsigned int i = 0;
+	for (; i < left.size; ++i)
 	{
-		*(sumPtr + i) = *(left.ptr + i);
+		*(sumStr.ptr + i) = *(left.ptr + i);
 	}
-	char* ptrToEnd = sumPtr + left.size;
-	for (unsigned int i = 0; i < right.size; ++i)
+	for (unsigned int j = 0; j < right.size; ++j,++i)
 	{
-		*(ptrToEnd + i) = *(right.ptr + i);
+		*(sumStr.ptr + i) = *(right.ptr + j);
 	}
-	*(sumPtr + sumSize) = '\0';
-	String sum(sumPtr);
-	delete[]sumPtr;
-	return sum;
+	*(sumStr.ptr + sumStr.size) = '\0';
+	return sumStr;
 }
 bool operator<=(const String& lOperand, const String& rOperand) 
 {

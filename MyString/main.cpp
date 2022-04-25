@@ -17,7 +17,7 @@ int main()
 	
 	{//делаем блок чтобы все переменные были локальными и не существовали под конец программы
 
-	std::vector<String> v= { "124", "123"};
+	std::vector<String> v = {"124", "123"};
 	v.at(1) = "2AV";
 	v.push_back(String("ACDC") + String("abDC"));//проверка на работоспособность сложения
 	v.push_back(v.at(0));//проверяем конструктор копирования 
@@ -34,10 +34,13 @@ int main()
 	sort(v.begin(), v.end(), reverse_lexographic_order);//сортируем
 	for (int i = 0; i < v.size(); ++i)
 		{
-		std::cout << v.at(i)<< "\n";
+		std::cout << v.at(i)<< "++\n";
 		}
-	
+	String a = "c+++";
+	String b = " is cool";
+	std::cout << a + b << " ";
 	}
+	
 	_CrtDumpMemoryLeaks();//проверяем на учетку
 	return 0;
 }
